@@ -33,6 +33,7 @@ try:
     auth.get_access_token(verifier)
 except tweepy.TweepError:
     print("Failed to get access token")
+    
 
 
 
@@ -93,6 +94,11 @@ def simulate():
     api.update_status(status=(hashtag + tweet))
     print("Tweet sent!")
 
+simulate()
 schedule.every().day.at("10:00").do(simulate)
 schedule.every().day.at("14:00").do(simulate)
 schedule.every().day.at("18:00").do(simulate)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
